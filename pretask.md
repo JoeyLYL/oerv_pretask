@@ -1,8 +1,11 @@
 # OERV_Pretask
 环境：
 Fedora 40
+
 qemu 8.2.9
+
 openEuler 24.03 LTS
+
 ## 任务一
 > 通过 QEMU 仿真 RISC-V 环境并启动 openEuler RISC-V 系统，设法输出 fastfetch 结果并截图提交
 
