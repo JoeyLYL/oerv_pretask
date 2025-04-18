@@ -41,5 +41,5 @@ make
 sudo make install
 ```
 运行fastfetch，结果如图：
-![QQ_1744967472552](https://github.com/user-attachments/assets/cd264366-7a5c-4041-956d-2527d16f1e22)
+![fastfetch](https://github.com/JoeyLYL/oerv_pretask/blob/main/images/fastfetch.png)
 
