@@ -21,7 +21,7 @@ qemu-system-riscv64 \
     -m 4G \
     # 启动文件
     -bios fw_payload_oe_uboot_2304.bin \
-    #虚拟机硬盘的映像文件和格式
+    # 虚拟机硬盘的映像文件和格式
     -drive file=openEuler-24.03-V1-base-qemu-testing.qcow2,format=qcow2,id=hd0 \
     -object rng-random,filename=/dev/urandom,id=rng0 \
     -device virtio-gpu \
