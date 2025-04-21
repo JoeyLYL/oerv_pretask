@@ -66,10 +66,11 @@ no_verify = 1
 user=userName
 pass=passWord
 ```
-同步OBS网页仓库到本地
+新建本地空目录
 ```
 osc checkout home:joeylyl
 A    home:joeylyl
+
 cd home:joeylyl
 ```
 将需要修改软件包的相关配置文件（_service）下载到本地
@@ -83,9 +84,10 @@ At revision 14.
 ```
 将软件包远程代码同步到本地
 ```
+cd openEuler:24.03:SP1:Everything/pcre2
 osc up -S
 ```
-重命名源文件，然后将重命名后的源文件添加到OBS暂存中
+删除_service文件，重命名源文件，删除从左边开始到最后一个:之间的内容，然后将重命名后的源文件添加到OBS暂存中
 ```
 rm -f _service;for file in `ls | grep -v .osc`;do new_file=${file##*:};mv $file $new_file;done
 osc addremove *
@@ -95,6 +97,6 @@ osc addremove *
 osc build standard_riscv64  riscv64
 ```
 构建完成如图所示：
-![]
+![build_pcre2](https://github.com/JoeyLYL/oerv_pretask/blob/main/build_pcre2.png)
 
 
