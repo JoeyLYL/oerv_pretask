@@ -99,4 +99,23 @@ osc build standard_riscv64  riscv64
 构建完成如图所示：
 ![build_pcre2](https://github.com/JoeyLYL/oerv_pretask/blob/main/build_pcre2.png)
 
+## 任务三
+> 尝试使用 qemu user & nspawn 或者 docker 加速完成任务二
+
+首先了解下qemu-user和nspawn
+- 前面两个任务使用qemu-system模拟openEuler RISC-V内核，模拟的是RISCV64系统环境，这种模式类似虚拟机，需要模拟内核态，性能相对较弱；而qemu-usr只模拟用户态程序，使用的是宿主机内核，速度更快
+- systemd-nspawn是一种轻量级容器工具，用于在隔离的环境中运行命令或完整的操作系统
+使用qemu-user和systemd-nspawn可以在宿主机使用osc构建软件包，加速编译过程
+
+安装所需工具（在Fedora宿主机中）
+```
+sudo dnf install qemu-user-static
+sudo dnf install qemu-user-binfmt
+sudo dnf install osc
+```
+在宿主机中使用osc工具同任务二一样拉取pcre2，然后开始构建，使用nspawn构建在osc build后加--vm-type=nspawn选项即可
+```
+osc build standard_riscv64 riscv64 --vm-type=nspawn
+```
+结果如图，可以看出：
 
