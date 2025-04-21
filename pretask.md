@@ -1,7 +1,7 @@
 # OERV_Pretask
 环境：
 
-Fedora 40
+宿主机：Fedora 40
 
 qemu 8.2.9
 
@@ -47,4 +47,54 @@ sudo make install
 运行fastfetch，结果如图：
 
 ![fastfetch](https://github.com/JoeyLYL/oerv_pretask/blob/main/images/fastfetch.png)
+
+## 任务二
+> 在 openEuler RISC-V 系统上通过 obs 命令行工具 osc，从源代码构建 RISC-V 版本的 rpm 包，比如 pcre2。
+
+安装osc
+```
+dnf install osc build
+```
+在[OBS网页](https://build.tarsier-infra.isrc.ac.cn/)注册账号
+
+编辑~/.oscrc修改配置文件
+```
+[general]
+apiurl = https://build.tarsier-infra.isrc.ac.cn/
+no_verify = 1
+[https://build.tarsier-infra.isrc.ac.cn/]
+user=userName
+pass=passWord
+```
+同步OBS网页仓库到本地
+```
+osc checkout home:joeylyl
+A    home:joeylyl
+cd home:joeylyl
+```
+将需要修改软件包的相关配置文件（_service）下载到本地
+```
+osc co openEuler:24.03:SP1:Everything  pcre2
+A    openEuler:24.03:SP1:Everything
+A    openEuler:24.03:SP1:Everything/pcre2
+_service: | Elapsed Time: 0:00:00                                              
+A    openEuler:24.03:SP1:Everything/pcre2/_service
+At revision 14.
+```
+将软件包远程代码同步到本地
+```
+osc up -S
+```
+重命名源文件，然后将重命名后的源文件添加到OBS暂存中
+```
+rm -f _service;for file in `ls | grep -v .osc`;do new_file=${file##*:};mv $file $new_file;done
+osc addremove *
+```
+开始构建
+```
+osc build standard_riscv64  riscv64
+```
+构建完成如图所示：
+![]
+
 
